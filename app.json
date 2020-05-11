@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "TestApp2",
-    "slug": "TestApp2",
+    "name": "TestApp",
+    "slug": "TestApp",
     "platforms": [
       "ios",
       "android",
