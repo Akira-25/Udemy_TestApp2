@@ -17,6 +17,7 @@ class NoteDetailScreen extends React.Component {
 
   componentDidMount() {
     const { note } = this.props.route.params;
+    // const noteObj = JSON.parse(note);
     this.setState({ note });
   }
 
