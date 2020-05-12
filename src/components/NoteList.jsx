@@ -13,15 +13,17 @@ const dateString = (date) => {
 class NoteList extends React.Component {
   renderNote({ item }) {
     const { body, createdOn } = item;
+    console.log('item >>', item);
+    const note = JSON.stringify(item);
+    console.log('JSON.stringify(item) >>', JSON.stringify(item));
     /*
-    const note = JSON.stringify({ item });
     console.log('note>', note);
     console.log('item>', item);
     */
     return (
       <TouchableHighlight
         onPress={() => {
-          this.props.navigation.navigate('Detail', { note: item }); // JSON.stringify(item)
+          this.props.navigation.navigate('Detail', { note }); // JSON.stringify(item)
         }}
       >
         <View style={styles.noteListItem}>
