@@ -5,6 +5,8 @@ import 'firebase/firestore';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import { decode, encode } from 'base-64';
+
 import SigninScreen from './src/screens/SigninScreen';
 import NoteDetailScreen from './src/screens/NoteDetailScreen';
 import NoteEditScreen from './src/screens/NoteEditScreen';
@@ -13,6 +15,9 @@ import SignupScreen from './src/screens/SignupScreen';
 import NoteCreateScreen from './src/screens/NoteCreateScreen';
 
 import ENV from './env.json';
+
+if (!global.btoa) { global.btoa = encode; }
+if (!global.atob) { global.atob = decode; }
 
 require('firebase/firestore');
 
