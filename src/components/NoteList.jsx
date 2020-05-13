@@ -7,23 +7,24 @@ import {
 const dateString = (date) => {
   if (date == null) { return ''; }
   const dateObject = date.toDate();
-  return dateObject.toISOString().split('T')[0];
+  return dateObject.toISOString().split('.')[0]; // T
 };
 
 class NoteList extends React.Component {
   renderNote({ item }) {
     const { body, createdOn } = item;
-    console.log('item >>', item);
-    const note = JSON.stringify(item);
-    console.log('JSON.stringify(item) >>', JSON.stringify(item));
-    /*
-    console.log('note>', note);
-    console.log('item>', item);
-    */
+    const passCreatedOn = createdOn.toDate().toISOString();
+
     return (
       <TouchableHighlight
         onPress={() => {
-          this.props.navigation.navigate('Detail', { note }); // JSON.stringify(item)
+          this.props.navigation.navigate(
+            'Detail',
+            {
+              passItem: JSON.stringify(item),
+              passCreatedOn, // passCreatedOn: passCreatedOn
+            },
+          ); // JSON.stringify(item)
         }}
       >
         <View style={styles.noteListItem}>

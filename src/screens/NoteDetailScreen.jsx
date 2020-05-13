@@ -4,33 +4,44 @@ import { StyleSheet, View, Text } from 'react-native';
 import Button from '../elements/Button';
 
 const dateString = (date) => {
+  console.log('NDS date >>', date);
   if (date == null) { return ''; }
-  const dateObject = date.toDate();
-  return dateObject.toISOString().split('T')[0];
+
+  // console.log('NDS dateObject >>', dateObject);
+  // console.log(date.toISOString());
+  return date.split('.')[0]; // T
 };
+
 
 class NoteDetailScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { note: {} };
+    this.state = { note: {}, createdOn: '' };
   }
 
   componentDidMount() {
-    const { note } = this.props.route.params;
-    const noteObj = JSON.parse(note);
-    console.log('route.note', note);
-    console.log('JSON.parse(note)', JSON.parse(note));
-    console.log('noteObj', noteObj);
-    this.setState({ note: noteObj });
+    const { passItem, passCreatedOn } = this.props.route.params;
+    console.log('passCreatedOn', passCreatedOn);
+
+    const note = JSON.parse(passItem);
+    const createdOn = passCreatedOn;
+
+    this.setState({ note, createdOn });
   }
 
   returnNote(note) {
-    this.setState({ note });
+    this.setState({ note }); // **************
+  }
+
+  returnTime(createdOn) {
+    console.log('returnTime', createdOn);
+    this.setState(createdOn);
   }
 
   render() {
-    const { note } = this.state;
-    const { body, createdOn } = note;
+    const { note, createdOn } = this.state;
+    const { body } = note;
+    // const createdOn = JSON.stringify(note.createdOn);
 
     if (body == null) { return null; }
     if (createdOn == null) { return null; }
@@ -53,7 +64,12 @@ class NoteDetailScreen extends React.Component {
           style={styles.editButton}
           onPress={() => {
             this.props.navigation.navigate(
-              'Edit', { note, returnNote: this.returnNote.bind(this) },
+              'Edit',
+              {
+                passNote: JSON.stringify(note),
+                returnNote: JSON.stringify(this.returnNote.bind(this)), // **************
+                returnTime: this.returnTime.bind(this),
+              },
             );
           }}
         />

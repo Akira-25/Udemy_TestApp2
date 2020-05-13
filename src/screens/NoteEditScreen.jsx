@@ -13,24 +13,28 @@ class NoteEditScreen extends React.Component {
   }
 
   componentDidMount() {
-    const { note } = this.props.route.params;
+    const { passNote, passCreatedOn } = this.props.route.params;
+    console.log('passCreatedOn', passCreatedOn);
+    const note = JSON.parse(passNote);
     this.setState({ body: note.body, key: note.key });
   }
 
-  handleSave() {
-    const { body, key } = this.state;
-    const { currentUser } = firebase.auth();
-    const newDate = firebase.firestore.Timestamp.now();
+  handleSaveNote() {
     const db = firebase.firestore();
+    const { currentUser } = firebase.auth();
 
+    const newDate = firebase.firestore.Timestamp.now(); // Create new timestamp
+    const strNewDate = newDate.toDate().toISOString(); // convert to ISOstr
+
+    const { body, key } = this.state;
     db.collection(`users/${currentUser.uid}/notes`).doc(key)
-      .update({ body, createdOn: newDate })
+      // Update data to Cloud Firestore
+      .update({ body, createdOn: newDate }) // body: body
+      // Update data in the App
       .then(() => {
-        this.props.route.params.returnNote({
-          body: this.state.body,
-          key: this.state.key,
-          createdOn: newDate,
-        });
+        const { returnNote, returnTime } = this.props.route.params;
+        returnNote({ body, key }); // body: body, key: key
+        returnTime({ createdOn: strNewDate });
         this.props.navigation.goBack();
       })
       .catch(() => {});
@@ -38,7 +42,6 @@ class NoteEditScreen extends React.Component {
 
   render() {
     const { body } = this.state;
-
     if (body == null) { return null; }
 
     return (
@@ -51,10 +54,10 @@ class NoteEditScreen extends React.Component {
           value={body}
           onChangeText={(text) => { this.setState({ body: text }); }}
         />
-
+        {/* SAVE Button */}
         <Button
           name="check"
-          onPress={this.handleSave.bind(this)}
+          onPress={this.handleSaveNote.bind(this)}
         />
       </View>
     );
