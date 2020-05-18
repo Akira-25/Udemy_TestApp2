@@ -6,9 +6,6 @@ import Button from '../elements/Button';
 const dateString = (date) => {
   console.log('NDS date >>', date);
   if (date == null) { return ''; }
-
-  // console.log('NDS dateObject >>', dateObject);
-  // console.log(date.toISOString());
   return date.split('.')[0]; // T
 };
 
@@ -16,7 +13,8 @@ const dateString = (date) => {
 class NoteDetailScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { note: {}, createdOn: '' };
+    this.state = { note: {}, createdOn: {} };
+    console.log('createdOn: {}', this.state.createdOn);
   }
 
   componentDidMount() {
@@ -28,18 +26,38 @@ class NoteDetailScreen extends React.Component {
 
     this.setState({ note, createdOn });
   }
+  /*
+  returnNote(editNoteStr, editCreatedOnStr) {
+    const note = JSON.parse(editNoteStr);
+    const createdOn = editCreatedOnStr;
+    this.setState({ note, createdOn });
+  }
+  */
+  /*
+OK
+  returnNote(note, createdOn) {
+    this.setState({ note, createdOn });
+  }
+  */
 
-  returnNote(note) {
+  /*
+TRY JSONstringify001
+  returnNote(returnBodyKey) {
+    const note = JSON.parse(returnBodyKey);
+    console.log('returnNote', note);
     this.setState({ note }); // **************
   }
 
-  returnTime(createdOn) {
+  returnTime(returnCreatedOn) {
+    const createdOn = JSON.parse(returnCreatedOn);
     console.log('returnTime', createdOn);
     this.setState(createdOn);
   }
+*/
 
   render() {
     const { note, createdOn } = this.state;
+    console.log('render()', createdOn);
     const { body } = note;
     // const createdOn = JSON.stringify(note.createdOn);
 
@@ -66,9 +84,13 @@ class NoteDetailScreen extends React.Component {
             this.props.navigation.navigate(
               'Edit',
               {
-                passNote: JSON.stringify(note),
-                returnNote: JSON.stringify(this.returnNote.bind(this)), // **************
-                returnTime: this.returnTime.bind(this),
+                passNote: JSON.stringify(note), // serial OK
+                passCreatedOn: createdOn, // serial OK
+                /*
+              TRY JSONstringify001
+                returnNote: JSON.stringify(this.returnNote.bind(this)), // serial NOK
+                returnTime: JSON.stringify(this.returnTime.bind(this)), // serial NOK
+                */
               },
             );
           }}

@@ -6,7 +6,7 @@ import {
 
 const dateString = (date) => {
   if (date == null) { return ''; }
-  const dateObject = date.toDate();
+  const dateObject = date.toDate(); // firebaseからjavascriptのオブジェクト型にしている
   return dateObject.toISOString().split('.')[0]; // T
 };
 
