@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.5,
+    shadowOpacity: 5,
     shadowRadius: 3,
     zIndex: 10,
   },

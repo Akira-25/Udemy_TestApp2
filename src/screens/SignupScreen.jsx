@@ -23,7 +23,7 @@ class SignupScreen extends React.Component {
           }),
         );
       })
-      .catch(() => {});
+      .catch((error) => { global.comsole.log(error); });
   }
 
   render() {
@@ -53,7 +53,7 @@ class SignupScreen extends React.Component {
         <TouchableHighlight
           style={styles.button}
           onPress={this.handleSignUp.bind(this)}
-          underlayColor="#c70f66"
+          underlayColor="#265366"
         >
           <Text style={styles.buttonTitle}>Sign Up</Text>
         </TouchableHighlight>
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   button: {
-    backgroundColor: '#E31676',
+    backgroundColor: '#265366',
     height: 48,
     borderRadius: 4,
     width: '70%',

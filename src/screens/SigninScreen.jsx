@@ -55,7 +55,7 @@ class SigninScreen extends React.Component {
         />
 
         <TouchableHighlight
-          style={styles.button}
+          style={styles.signIn}
           onPress={this.handleSignIn.bind(this)}
           underlayColor="#c70f66"
         >
@@ -63,10 +63,12 @@ class SigninScreen extends React.Component {
         </TouchableHighlight>
 
         <TouchableOpacity
-          style={styles.signup}
+          style={styles.signUp}
           onPress={this.handleSignUpScreen.bind(this)}
+          underlayColor="#265366"
         >
-          <Text style={styles.buttonTitle}>Sign Up</Text>
+          <Text style={styles.buttonTitle}>I am a new user,</Text>
+          <Text style={styles.buttonTitle}>Sign Up →</Text>
         </TouchableOpacity>
 
       </View>
@@ -99,7 +101,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     alignSelf: 'center',
   },
-  button: {
+  signIn: {
     backgroundColor: '#E31676',
     height: 48,
     borderRadius: 4,
@@ -107,14 +109,15 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
   },
-  signup: {
-    marginTop: 16,
-    backgroundColor: '#E31676',
-    height: 48,
-    borderRadius: 4,
-    width: '70%',
+  signUp: {
+    marginTop: 45,
+    backgroundColor: '#265366',
+    height: 60,
+    borderRadius: 50,
+    width: '60%',
     alignSelf: 'center',
     justifyContent: 'center',
+    opacity: 0.9,
   },
 });
 
