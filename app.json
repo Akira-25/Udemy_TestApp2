@@ -25,6 +25,9 @@
       "supportsTablet": true,
       "bundleIdentifier": "travel.shitamichi.simplenotes",
       "buildNumber": "1.0.1"
+    },
+    "android": {
+      "package": "travel.shitamichi.simplenotes"
     }
   }
 }
